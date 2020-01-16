@@ -1,12 +1,25 @@
-package org.firstinspires.ftc.teamcode.Subsystem;
+package org.firstinspires.ftc.teamcode.subsystem;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class DriveBase {
+    private DcMotor leftDrive;
+    private DcMotor rightDrive;
 
+    public DriveBase(DcMotor leftDrive, DcMotor rightDrive) {
+        this.leftDrive = leftDrive;
+        this.rightDrive = rightDrive;
 
-    public DriveBase() {
-
+        this.leftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
+    public void setLeftSpeed(double leftSpeed) {
+        leftDrive.setPower(leftSpeed);
+    }
 
-    
+    public void setRightSpeed(double rightSpeed) {
+        rightDrive.setPower(rightSpeed);
+    }
 }
