@@ -11,8 +11,8 @@ public class DriveBase {
         this.leftDrive = leftDrive;
         this.rightDrive = rightDrive;
 
-        this.leftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
-        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.rightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
     public void setLeftSpeed(double leftSpeed) {
@@ -21,5 +21,10 @@ public class DriveBase {
 
     public void setRightSpeed(double rightSpeed) {
         rightDrive.setPower(rightSpeed);
+    }
+
+    public void initialize (){
+        setLeftSpeed(0);
+        setRightSpeed(0);
     }
 }

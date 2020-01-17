@@ -1,7 +1,7 @@
 //
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
-//
+
 
 package org.firstinspires.ftc.teamcode;
 
@@ -16,6 +16,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.subsystem.DriveBase;
+import org.firstinspires.ftc.teamcode.subsystem.Lift;
 
 import java.sql.Driver;
 
@@ -33,13 +34,17 @@ public class Robot extends LinearOpMode {
 
         DriveBase driveBase = new DriveBase(this.hardwareMap.get(DcMotor.class,"left_drive"),
                                   this.hardwareMap.get(DcMotor.class,"right_drive"));
+             Lift lift  = new Lift(this.hardwareMap.get(DcMotor.class,"lift_motor"));
+
+        driveBase.initialize();
+        lift.intialize();
 
         this.waitForStart();
         this.runtime.reset();
 
         while(this.opModeIsActive()) {
-            telemetry.addData("Status", "Running");
-            telemetry.update();
+            //telemetry.addData("Status", "initailize");
+            //telemetry.update();
 
             double drive = this.gamepad1.left_stick_y;
             double turn = this.gamepad1.right_stick_x;
@@ -47,8 +52,22 @@ public class Robot extends LinearOpMode {
             double leftSpeed = Range.scale (drive + turn, -1.4143, 1.4143, -1, 1);
             double rightSpeed =Range.scale (drive - turn, -1.4143, 1.4143, -1, 1);
 
+            telemetry.addData("Left", drive);
+            telemetry.addData("Right", turn);
+            telemetry.update();
+
             driveBase.setLeftSpeed(leftSpeed);
             driveBase.setRightSpeed(rightSpeed);
+            if (this.gamepad2.y) {
+                // set lift motor up
+                lift.setLiftMotor(1);
+            } else if (this.gamepad2.a) {
+                // set lift motor down
+                lift.setLiftMotor(-1);
+            } else{
+                // trun motor off
+                lift.setLiftMotor(0);
+            }
         }
     }
 }
