@@ -9,15 +9,12 @@ public class Lift {
 
         this.liftMotor = liftMotor;
 
-        this.liftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        this.liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
 
     public void setLiftMotor(double liftMotorSpeed) {
         liftMotor.setPower(liftMotorSpeed);
-
-
-
     }
 
     public void intialize(){

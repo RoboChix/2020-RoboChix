@@ -16,6 +16,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.subsystem.DriveBase;
+import org.firstinspires.ftc.teamcode.subsystem.Grabber;
 import org.firstinspires.ftc.teamcode.subsystem.Lift;
 
 import java.sql.Driver;
@@ -36,6 +37,10 @@ public class Robot extends LinearOpMode {
                                   this.hardwareMap.get(DcMotor.class,"right_drive"));
              Lift lift  = new Lift(this.hardwareMap.get(DcMotor.class,"lift_motor"));
 
+
+
+             Grabber grabber = new Grabber(this.hardwareMap.get(Servo.class, "left_intake"),
+        this.hardwareMap.get(Servo.class,"right_intake"));
         driveBase.initialize();
         lift.intialize();
 
@@ -49,8 +54,8 @@ public class Robot extends LinearOpMode {
             double drive = this.gamepad1.left_stick_y;
             double turn = this.gamepad1.right_stick_x;
 
-            double leftSpeed = Range.scale (drive + turn, -1.4143, 1.4143, -1, 1);
-            double rightSpeed =Range.scale (drive - turn, -1.4143, 1.4143, -1, 1);
+            double leftSpeed = Range.scale (drive - turn, -1.4143, 1.4143, -1, 1);
+            double rightSpeed =Range.scale (drive + turn, -1.4143, 1.4143, -1, 1);
 
             telemetry.addData("Left", drive);
             telemetry.addData("Right", turn);
@@ -67,6 +72,11 @@ public class Robot extends LinearOpMode {
             } else{
                 // trun motor off
                 lift.setLiftMotor(0);
+            }
+            if (this.gamepad2.x) {
+                grabber.setGrabberPosition(0.1, 0.5);
+            } else if (this.gamepad2.b) {
+                grabber.setGrabberPosition(0.2,0.4);
             }
         }
     }
