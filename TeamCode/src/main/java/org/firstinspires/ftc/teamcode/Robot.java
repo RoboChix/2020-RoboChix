@@ -73,10 +73,10 @@ public class Robot extends LinearOpMode {
                 // trun motor off
                 lift.setLiftMotor(0);
             }
-            if (this.gamepad2.x) {
+            if (this.gamepad2.x) { // open
                 grabber.setGrabberPosition(0.1, 0.5);
-            } else if (this.gamepad2.b) {
-                grabber.setGrabberPosition(0.2,0.4);
+            } else if (this.gamepad2.b) { // close
+                grabber.setGrabberPosition(0.3,0.35);
             }
         }
     }
